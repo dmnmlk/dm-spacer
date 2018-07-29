@@ -1,5 +1,7 @@
 # dm_spacer
 
+Vue app for nasa image gallery
+
 ## Project setup
 ```
 npm install
