@@ -9,5 +9,7 @@
 </template>
 
 <style lang="scss" scoped>
-
+  * {
+    font-family: sans-serif;
+  }
 </style>
