@@ -12,7 +12,8 @@
     </div>
     <ul>
       <div v-for="item in apiResponse" :key="item.data[0].nasa_id">
-        {{item.links[0].href}}
+        <div>{{item.links[0].href}}</div>
+        <div>{{item.data[0].description}}</div>
       </div>
     </ul>
   </div>
