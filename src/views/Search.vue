@@ -1,82 +1,49 @@
 <template>
   <div class="wrapper">
-    <div class="search">
-      <label for="search">Search</label>
-      <input
-        id="search"
-        name="search"
-        placeholder="e.g. Moon"
-        v-model="inputValue"
-        @input="handleInput"
-        >
-    </div>
+    <Claim />
+    <Input />
     <ul>
-      <div v-for="item in apiResponse" :key="item.data[0].nasa_id">
+      <!-- <div v-for="item in apiResponse" :key="item.data[0].nasa_id">
         <div>{{item.links[0].href}}</div>
         <div>{{item.data[0].description}}</div>
-      </div>
+      </div> -->
     </ul>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import debounce from 'lodash.debounce';
 
-const API = 'https://images-api.nasa.gov/search';
+import Claim from '@/components/Claim.vue';
+import Input from '@/components/Input.vue';
+
 
 export default {
   name: 'Home',
-  data() {
-    return {
-      inputValue: '',
-      apiResponse: [],
-    };
-  },
-  methods: {
-    // eslint-disable-next-line
-    handleInput: debounce(function () {
-      axios.get(`${API}?q=${this.inputValue}&media_type=image`)
-        .then((response) => {
-          console.log(response.data.collection.items);
-
-          this.apiResponse = response.data.collection.items;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, 500),
+  components: {
+    Claim,
+    Input,
   },
 };
 </script>
 
 <style lang="scss" scoped>
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
   .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin: 0;
     padding: 30px;
     width: 100%;
-  }
-
-  .search {
-    display: flex;
-    flex-direction: column;
-    width: 250px;
-
-    label {
-      margin-bottom: 5px;
-    }
-
-    input {
-      border: 0;
-      border-bottom: 1px solid #000;
-    }
-
-    input:focus {
-      outline: none;
-    }
-
+    height: 100vh;
+    background-image: url("../assets/heroimage.jpg");
+    background-size: cover;
+    background-position: 80% 0%;
   }
 </style>
