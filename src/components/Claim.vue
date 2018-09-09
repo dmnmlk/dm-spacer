@@ -18,8 +18,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .claim,
-    .subclaim {
+    #claim-wrapper {
         color: #FFF;
         text-align: center;
         margin: 0 0 30px 0;

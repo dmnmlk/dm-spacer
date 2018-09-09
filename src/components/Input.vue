@@ -3,40 +3,31 @@
       <input
         id="search"
         name="search"
+        :class="{ dark }"
         placeholder="e.g. Moon"
-        v-model="inputValue"
-        @input="handleInput"
+        :value="value"
+        @input="handleChange"
         >
     </div>
 </template>
 
 <script>
-import axios from 'axios';
-import debounce from 'lodash.debounce';
-
-const API = 'https://images-api.nasa.gov/search';
-
 export default {
   name: 'Input',
-  data() {
-    return {
-      inputValue: '',
-      apiResponse: [],
-    };
+  props: {
+    value: {
+      type: String,
+      required: true,
+    },
+    dark: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
-    // eslint-disable-next-line
-    handleInput: debounce(function () {
-      axios.get(`${API}?q=${this.inputValue}&media_type=image`)
-        .then((response) => {
-          console.log(response.data.collection.items);
-
-          this.apiResponse = response.data.collection.items;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, 500),
+    handleChange(e) {
+      this.$emit('input', e.target.value);
+    },
   },
 };
 </script>
@@ -57,6 +48,26 @@ export default {
 
     input:focus {
       outline: none;
+      box-shadow: 0px 15px 15px -5px rgba(255, 255, 255, .2);
+    }
+
+    .dark {
+      color: #1e3d4a;
+      border-bottom: 1px solid #1e3d4a;
+
+    }
+
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #CCC;
+        opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #CCC;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: #CCC;
     }
 
   }
